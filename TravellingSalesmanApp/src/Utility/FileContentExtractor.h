@@ -15,6 +15,7 @@ namespace Utility
 	{
 		std::ifstream fileToRead(path);
 
+
 		if (fileToRead) 
 		{
 			std::vector<std::string> output;
@@ -31,7 +32,7 @@ namespace Utility
 		}
 		else 
 		{
-			return std::vector<std::string>();
+			throw runtime_error("invliade file path");
 		}
 		
 	}

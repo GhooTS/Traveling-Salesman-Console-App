@@ -9,9 +9,6 @@ namespace TSP
 	class Mutator
 	{
 	public:
-		Mutator() 
-		{
-		}
 		static void mutateInversion(std::vector<std::vector<int>>& indviduals, double mutationChance)
 		{
 			int maxIndex = indviduals[0].size() - 1;
@@ -180,5 +177,7 @@ namespace TSP
 				}
 			}
 		}
+		private:
+			Mutator() {};
 	};
 }

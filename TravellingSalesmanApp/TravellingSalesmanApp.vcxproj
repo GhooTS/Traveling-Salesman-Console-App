@@ -72,15 +72,27 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/src</IncludePath>
+    <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)\bin-int\$(Platform)\$(Configuration)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/src</IncludePath>
+    <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)\bin-int\$(Platform)\$(Configuration)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/src</IncludePath>
+    <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)\bin-int\$(Platform)\$(Configuration)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/src</IncludePath>
+    <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)\bin-int\$(Platform)\$(Configuration)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -90,7 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(TBBROOT)\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(TBBROOT)\include;$(SolutionDir)\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -107,7 +119,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(TBBROOT)\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(TBBROOT)\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -124,7 +136,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(TBBROOT)\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(TBBROOT)\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,6 +157,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -154,20 +168,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="TravellingSalesmanApp.cpp" />
+    <ClCompile Include="src\TravellingSalesmanApp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Crossover.h" />
-    <ClInclude Include="FileContentExtractor.h" />
-    <ClInclude Include="FittnessFunction.h" />
-    <ClInclude Include="IndivdualsGenerator.h" />
-    <ClInclude Include="MatrixGenerator.h" />
-    <ClInclude Include="Mutator.h" />
-    <ClInclude Include="Selection.h" />
-    <ClInclude Include="SelectionJob.h" />
-    <ClInclude Include="StringUtility.h" />
-    <ClInclude Include="TSP.h" />
-    <ClInclude Include="TSPJob.h" />
+    <ClInclude Include="src\Commands\Command.h" />
+    <ClInclude Include="src\Commands\ChangeValueCommand.h" />
+    <ClInclude Include="src\Operation\Crossover.h" />
+    <ClInclude Include="src\Utility\FileContentExtractor.h" />
+    <ClInclude Include="src\Operation\FittnessFunction.h" />
+    <ClInclude Include="src\Utility\IndivdualsGenerator.h" />
+    <ClInclude Include="src\Utility\IndividualsUtility.h" />
+    <ClInclude Include="src\Utility\MatrixGenerator.h" />
+    <ClInclude Include="src\Operation\Mutator.h" />
+    <ClInclude Include="src\Operation\Selection.h" />
+    <ClInclude Include="src\SImpleCommandLine.h" />
+    <ClInclude Include="src\Utility\StringToPrimitiveTypeConverter.h" />
+    <ClInclude Include="src\Utility\StringUtility.h" />
+    <ClInclude Include="src\TSP.h" />
+    <ClInclude Include="src\Commands\TSPCommands.h" />
+    <ClInclude Include="src\TSPConfig.h" />
+    <ClInclude Include="src\TSPData.h" />
+    <ClInclude Include="src\TSPJob.h" />
+    <ClInclude Include="src\TSPResult.h" />
+    <ClInclude Include="src\TSPRunner.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
