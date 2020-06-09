@@ -45,7 +45,7 @@ Mutation through inversion is recommanded with mutation chance on level between 
 
 ### Crossover
 
-there is only one PMX crossover in this implementation, you can find more about it in [this article](https://www.hindawi.com/journals/cin/2017/7430125/). Copy chance control how often indviduals are crosed, the smaller the copy chance parameter is, the more likely that 2 individuals will cross each other. 5% procent is recommanded.
+there is only PMX crossover in this implementation, you can find more about it in [this article](https://www.hindawi.com/journals/cin/2017/7430125/). Copy chance control how often indviduals are crosed, the smaller the copy chance parameter is, the more likely that 2 individuals will cross each other. 5% procent is recommanded.
 
 ### Other parameters
 
