@@ -152,7 +152,7 @@ private:
 	{
 		if (results[index].saved) return false;
 
-		std::ofstream resultFile(results[index].getResultFileName() + std::to_string(sessionId) + ".txt",std::ios::app);
+		std::ofstream resultFile(results[index].getResultFilePath() + std::to_string(sessionId) + ".txt",std::ios::app);
 
 		resultFile << std::endl;
 		resultFile << "config:" << std::endl;
