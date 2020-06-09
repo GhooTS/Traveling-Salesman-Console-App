@@ -9,6 +9,8 @@ namespace TSP
 	class Mutator
 	{
 	public:
+
+		//for all population
 		static void mutateInversion(std::vector<std::vector<int>>& indviduals, double mutationChance)
 		{
 			int maxIndex = indviduals[0].size() - 1;
@@ -55,35 +57,8 @@ namespace TSP
 				}
 			}
 		}
-		static void potatoMutation(std::vector<std::vector<int>>& individuals, double mutationChance)
-		{
 
-			for (size_t i = 0; i < individuals.size(); i++)
-			{
-				double randomNum = (double)rand() / RAND_MAX;
-				if (randomNum < mutationChance)
-				{
-					int randomIndex = rand() % (individuals[i].size() - 2);
-					int tmp = individuals[i][randomIndex];
-
-					if (rand() % 100 < 51)
-					{
-						int next = randomIndex + 1;
-						next = next < individuals[i].size() - 1 ? next : 0;
-						individuals[i][randomIndex] = individuals[i][next];
-						individuals[i][next] = tmp;
-					}
-					else
-					{
-						int prev = randomIndex - 1;
-						prev = prev >= 0 ? prev : individuals[i].size() - 2;
-						individuals[i][randomIndex] = individuals[i][prev];
-						individuals[i][prev] = tmp;
-					}
-				}
-			}
-		}
-
+		//for single indivdual
 		static void mutateInversion(vector<int>& indviduals, double mutationChance)
 		{
 			int maxIndex = indviduals.size() - 1;
@@ -150,31 +125,6 @@ namespace TSP
 				int tmp = indviduals[randomIndexOne];
 				indviduals[randomIndexOne] = indviduals[randomIndexTwo];
 				indviduals[randomIndexTwo] = tmp;
-			}
-		}
-		static void potatoMutation(vector<int>& individuals, double mutationChance)
-		{
-
-			double randomNum = (double)rand() / RAND_MAX;
-			if (randomNum < mutationChance)
-			{
-				int randomIndex = rand() % (individuals.size() - 2);
-				int tmp = individuals[randomIndex];
-
-				if (rand() % 100 < 51)
-				{
-					int next = randomIndex + 1;
-					next = next < individuals.size() - 3 ? next : 0;
-					individuals[randomIndex] = individuals[next];
-					individuals[next] = tmp;
-				}
-				else
-				{
-					int prev = randomIndex - 1;
-					prev = prev >= 0 ? prev : individuals.size() - 3;
-					individuals[randomIndex] = individuals[prev];
-					individuals[prev] = tmp;
-				}
 			}
 		}
 		private:

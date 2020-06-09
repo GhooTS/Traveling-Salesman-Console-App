@@ -52,8 +52,15 @@ class TSPSetDistanceMatrixCommand : public Command
 	{
 		try {
 			std::vector<std::string> fileContent = Utility::getFileContent(args[0]);
-			data.setDistanceMatrix(TSP::MatrixGenerator::generate(fileContent, true));
-			config.from = args[0];
+			auto fileFormat = Utility::splite(args[0], ".")[1];
+			if (fileFormat == "txt" || fileFormat == "tsp") {
+				data.setDistanceMatrix(TSP::MatrixGenerator::generate(fileContent, fileFormat == "tsp"));
+				config.from = args[0];
+			}
+			else 
+			{
+				std::cout << "file format is incorrect, only .txt and .tsp allowed" << std::endl;
+			}
 		}
 		catch (exception& exp)
 		{
@@ -89,7 +96,6 @@ public:
 	TSP::TSPConfig& config;
 };
 
-
 class TSPResultSaveCommand : public Command
 {
 	void execute(std::vector<std::string>& args)
@@ -98,11 +104,10 @@ class TSPResultSaveCommand : public Command
 		{
 			for (int i = 0;i < results.size();i++)
 			{
-				save(i);
-				if (results[i].saved == false) {
+				if (save(i)) {
 					std::cout << "Result with ID " << i;
-					std::cout << " has been save to "; 
-					std::cout << results[i].getResultFileName() << std::to_string(sessionId) << ".txt" << std::endl;
+					std::cout << " has been save to ";
+					std::cout << results[i].getResultFilePath() << std::to_string(sessionId) << ".txt" << std::endl;
 				}
 			}
 		}
@@ -113,8 +118,11 @@ class TSPResultSaveCommand : public Command
 				int index = stoi(args[0]);
 				if (index >= 0 && index < results.size())
 				{
-					save(index);
-					std::cout << "result:" << index << " save to file: " << results[index].getResultFileName() << std::to_string(sessionId) << ".txt" << std::endl;
+					if (save(index)) {
+						std::cout << "Result with ID " << index;
+						std::cout << " has been save to ";
+						std::cout << results[index].getResultFilePath() << std::to_string(sessionId) << ".txt" << std::endl;
+					}
 				}
 			}
 			catch (std::invalid_argument& exp)
@@ -140,9 +148,9 @@ public:
 	int sessionId;
 	std::vector<TSP::TSPResult>& results;
 private:
-	void save(int index) 
+	bool save(int index) 
 	{
-		if (results[index].saved) return;
+		if (results[index].saved) return false;
 
 		std::ofstream resultFile(results[index].getResultFileName() + std::to_string(sessionId) + ".txt",std::ios::app);
 
@@ -155,6 +163,8 @@ private:
 		resultFile.close();
 
 		results[index].saved = true;
+
+		return true;
 	}
 };
 

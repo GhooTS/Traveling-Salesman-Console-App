@@ -26,7 +26,7 @@ namespace TSP
 			std::cout << config.ToString() << std::endl;
 		}
 
-		std::string getResultFileName() 
+		std::string getResultFilePath() 
 		{
 			return Utility::splite(config.from, ".")[0] + "_Result";
 		}

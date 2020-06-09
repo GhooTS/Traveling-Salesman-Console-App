@@ -32,7 +32,7 @@ namespace Utility
 		}
 		else 
 		{
-			throw runtime_error("invliade file path");
+			throw runtime_error("invalid file path");
 		}
 		
 	}

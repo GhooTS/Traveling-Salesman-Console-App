@@ -10,7 +10,7 @@ namespace TSP
 	class Selector
 	{
 	public:
-		static void ruletSelection(vector<vector<int>>& individuals, vector<int>& selection)
+		static void rouletteSelection(vector<vector<int>>& individuals, vector<int>& selection)
 		{
 			int max = individuals[0].back();
 
@@ -34,7 +34,7 @@ namespace TSP
 				sumUpIndividuals += individuals[i].back();
 			}
 
-			int interialSum = sumUpIndividuals;
+			int internalSum = sumUpIndividuals;
 
 			for (size_t i = 0; i < individuals.size(); i++)
 			{
@@ -43,18 +43,19 @@ namespace TSP
 
 				for (size_t j = 0; j < individuals.size(); j++)
 				{
-					if (interialSum <= randomValue)
+					if (internalSum <= randomValue)
 					{
 						selection[i] = j;
 						break;
 					}
-					interialSum -= individuals[j].back();
+					internalSum -= individuals[j].back();
 				}
 
-				interialSum = sumUpIndividuals;
+				internalSum = sumUpIndividuals;
 			}
 		}
 		
+		//for all population
 		static void turnamentSelection(size_t tournamentSize, vector<vector<int>>& individuals, vector<int>& selection)
 		{
 			for (size_t i = 0; i < individuals.size(); i++)
@@ -74,7 +75,8 @@ namespace TSP
 				selection[i] = best;
 			}
 		}
-
+		
+		//for single individual
 		static int turnamentSelection(size_t tournamentSize, vector<vector<int>>& individuals)
 		{
 			int best = rand() % individuals.size();

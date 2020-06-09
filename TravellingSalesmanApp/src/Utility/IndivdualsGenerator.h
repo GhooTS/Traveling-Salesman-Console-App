@@ -9,6 +9,13 @@ namespace TSP
 	static class IndivdualsGenerator
 	{
 	public:
+		/// <summary>
+		/// Generate random indviduals
+		/// </summary>
+		/// <param name="numberOfIndividuals"></param>
+		/// <param name="numberOfGens">size of individual</param>
+		/// <param name="lastScore">is the last element of individual score from fitness function?</param>
+		/// <returns></returns>
 		static std::vector<std::vector<int>> generate(int numberOfIndividuals,int numberOfGens,bool lastScore) 
 		{
 
@@ -44,7 +51,7 @@ namespace TSP
 		}
 
 
-		static void GenerateNewComers(std::vector<std::vector<int>> indivduals,int generateAmount) 
+		static void generateNewComers(std::vector<std::vector<int>> indivduals,int generateAmount) 
 		{
 			for (size_t i = 0; i < generateAmount; i++)
 			{

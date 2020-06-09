@@ -6,9 +6,10 @@
 #include "TSPJob.h"
 #include "Operation/Selection.h"
 #include <tbb/tbb.h>
-#include <thread>
-#include <stdio.h>
-#include <stdlib.h>
+#include <chrono>
+#include <iomanip>
+#include <math.h>
+
 
 namespace TSP 
 {
@@ -21,12 +22,15 @@ namespace TSP
             
             data.best.back() = INT32_MAX;
 
+            auto startTime = chrono::high_resolution_clock::now();
             for (size_t i = 0; i < config.numberOfGeneration; i++)
             {
+
+                //tournament selection can be do in parallel in contrast to rule selection, at least in current implmentation
                 switch (config.selectionType)
                 {
                     case SelectionType::rulet:
-                        TSP::Selector::ruletSelection(data.indivduals, data.selection);
+                        TSP::Selector::rouletteSelection(data.indivduals, data.selection);
                         break;
                     //case SelectionType::tournament:
                     //    TSP::Selector::turnamentSelection(config.tournamnetSize, data.indivduals, data.selection);
@@ -57,6 +61,14 @@ namespace TSP
                 }
 
             }
+
+            auto endTime = chrono::high_resolution_clock::now();
+
+            auto duration = chrono::duration_cast<chrono::milliseconds>(endTime - startTime);
+
+            std::cout << "----------------------------------------------" << std::endl;
+            std::cout << "Execution time: " << duration.count() / (long double)1000<< " s" << std::endl;
+            std::cout << "----------------------------------------------" << std::endl;
 
             return TSPResult(config, data.best);
 		}
